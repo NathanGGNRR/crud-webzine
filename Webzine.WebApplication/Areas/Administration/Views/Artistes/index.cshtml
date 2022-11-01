@@ -1,0 +1,31 @@
+﻿@model IndexArtistesViewModel
+
+<div class="col mt-4">
+    <h1>Artistes</h1>
+    <hr />
+    <form method="get">
+        <button asp-route-area="Administration" asp-controller="Artistes" asp-action="@(nameof(ArtistesController.Manage))" asp-route-fonction="Create" class="btn btn-primary mb-4">
+            <i class="fas fa-plus mr-2"></i>Ajouter un nouvel artiste
+        </button>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr class="header-column">
+                <th scope="col" class="first-column">Nom de l'artiste</th>
+                <th scope="col" class="second-column">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Artistes)
+            {
+                @await Component.InvokeAsync("RowTableArtiste", new { artiste = item })
+            }
+
+        </tbody>
+    </table>
+    @if (Model.TotalArtistes > Model.LengthPage)
+    {
+        @await Component.InvokeAsync("PaginationArtistes", new { pagination = Model })
+    }
+</div>

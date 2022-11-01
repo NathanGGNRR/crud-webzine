@@ -1,0 +1,87 @@
+﻿@model IndexCommentairesViewModel
+
+<div class="d-flex flex-row align-items-center">
+    <div class="d-flex flex-row border-color-light-gray rounded mr-4 px-2 align-items-center">
+        <p class="font-weight-bold text-primary mb-0 h-auto">@Model.PageActuel</p>
+        <p class="mx-1 mb-0 h-auto"> / </p>
+        <p class="font-weight-bold mb-0 h-auto">@(Math.Ceiling(Convert.ToDouble(Model.TotalCommentaires) / Model.LengthPage))</p>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pg-blue mb-0 mr-4">
+            @if (Model.PageActuel == 1)
+            {
+                <li class="page-item admin-disabled">
+                    <a class="page-link" tabindex="-1">Previous</a>
+                </li>
+            }
+            else
+            {
+                @if (Model.PageActuel == 2)
+                {
+                    <li class="page-item ">
+                        <a class="page-link" tabindex="-1" asp-area="Administration" asp-controller="Commentaires" asp-action="Index">Previous</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item ">
+                        <a class="page-link" tabindex="-1" asp-area="Administration" asp-controller="Commentaires" asp-action="Navigate" asp-route-id="@(Model.PageActuel - 1)">Previous</a>
+                    </li>
+                }
+            }
+            @if (Math.Ceiling(Convert.ToDouble(Model.TotalCommentaires) / @Model.LengthPage) > Model.DisplayPage)
+            {
+                @for (int i = ((Model.PageActuel + (Model.DisplayPage - 1)) <= Math.Ceiling(Convert.ToDouble(Model.TotalCommentaires) / Model.LengthPage)) ? Model.PageActuel : Convert.ToInt32(Math.Ceiling(Convert.ToDouble(Model.TotalCommentaires) / Model.LengthPage) - Model.DisplayPage + 1); i <= ((Model.PageActuel + (Model.DisplayPage - 1) <= Math.Ceiling(Convert.ToDouble(Model.TotalCommentaires) / Model.LengthPage)) ? (Model.PageActuel + (Model.DisplayPage - 1)) : Math.Ceiling(Convert.ToDouble(Model.TotalCommentaires) / Model.LengthPage)); i++)
+                {
+                    if (Model.PageActuel == i)
+                    {
+                        <li class="page-item active">
+                            <a class="page-link">@i <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" asp-area="Administration" asp-controller="Commentaires" asp-action="Navigate" asp-route-id="@i">@i</a></li>
+                    }
+
+                }
+            }
+            else
+            {
+                @for (int i = 1; i <= Math.Ceiling(Convert.ToDouble(@Model.TotalCommentaires) / @Model.LengthPage); i++)
+                {
+                    if (Model.PageActuel == i)
+                    {
+                        <li class="page-item active">
+                            <a class="page-link">@i <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" asp-area="Administration" asp-controller="Commentaires" asp-action="Navigate" asp-route-id="@i">@i</a></li>
+                    }
+
+                }
+            }
+            @if (Model.Next)
+            {
+                <li class="page-item ">
+                    <a class="page-link" asp-area="Administration" asp-controller="Commentaires" asp-action="Navigate" asp-route-id="@(Model.PageActuel + 1)">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item admin-disabled">
+                    <a class="page-link">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+    <div class="w-auto d-flex flex-row">
+        <input type="number" min="1" max="@(Math.Ceiling(Convert.ToDouble(@Model.TotalCommentaires) / @Model.LengthPage))" id="numberPage" class="form-control border-radius-left" />
+        <div class="input-group-append">
+            <a class="btn btn-outline-secondary border-radius-right" id="btnGO" data-controller="Commentaires" asp-area="Administration" asp-controller="Commentaires" asp-action="Navigate">GO</a>
+        </div>
+    </div>
+</div>
+

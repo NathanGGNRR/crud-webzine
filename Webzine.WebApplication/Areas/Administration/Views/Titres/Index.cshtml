@@ -1,0 +1,37 @@
+﻿@model IndexTitresViewModel
+
+<div class="col mt-4">
+    <h1>Titres</h1>
+    <hr>
+    <form method="get">
+        <button asp-route-area="Administration" asp-controller="Titres" asp-action="@(nameof(TitresController.Manage))" asp-route-fonction="Create" class="btn btn-primary mb-4">
+            <i class="fas fa-plus mr-2"></i>Ajouter un nouveau titre
+        </button>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr class="header-column">
+                <th scope="col" class="admin-first-col"><strong>Artiste</strong></th>
+                <th scope="col" class="admin-second-col">Libellé</th>
+                <th scope="col" class="admin-col text-center">Durée</th>
+                <th scope="col" class="admin-col text-center">Date de sortie</th>
+                <th scope="col" class="admin-col text-center"><i class="fa fa-eye"></i></th>
+                <th scope="col" class="admin-col text-center"><i class="fa fa-thumbs-up"></i></th>
+                <th scope="col" class="admin-col text-center"><i class="fa fa-comments"></i></th>
+                <th scope="col" class="admin-col text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var titre in Model.Titres)
+            {
+                @await Component.InvokeAsync("RowTableTitre", new { titre = titre });
+            }
+        </tbody>
+    </table>
+    @if (Model.TotalTitres > Model.LengthPage)
+    {
+        @await Component.InvokeAsync("PaginationTitres", new { pagination = Model })
+    }
+</div>

@@ -1,0 +1,205 @@
+﻿.dropdown-item:hover{
+    background-color: lightgray;
+    text-decoration: none;
+}
+
+.dropdown-item:active {
+    color: black;
+}
+
+.navbar {
+    font-size: larger
+}
+
+.mw-20 {
+    max-width: 20% !important;
+}
+
+
+.w-15 {
+    width: 15% !important;
+}
+
+@media screen and (max-width: 991px) {
+    .w-15 {
+        width: 40% !important;
+    }
+}
+
+    .comment {
+        display: flex;
+        margin-top: 5px;
+    }
+
+    .search-result {
+        margin-top: 5px;
+    }
+
+        .search-result img {
+            float: left;
+            width: 64px;
+        }
+
+        .search-result p {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .search-result img {
+            float: left;
+            width: 64px;
+        }
+
+        .search-result p {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+    .header-column {
+        background-color: #dddddd;
+    }
+
+    .first-column {
+        width: 90%;
+    }
+
+    .header-column tr {
+        color: black;
+        font-weight: bold;
+    }
+
+    .img-album {
+        max-height: 400px;
+    }
+
+    .header-column {
+        background-color: #dddddd;
+    }
+
+    .title-input-edit {
+        width: 15%;
+        font-weight: normal;
+    }
+
+    .margin-button-admin {
+        margin-left: 14%;
+    }
+
+    .width-button-save {
+        width: 10%;
+    }
+
+    .admin-col {
+        white-space: nowrap;
+        width: 1%;
+    }
+
+    .admin-first-col {
+        width: 15%;
+    }
+
+    .admin-second-col {
+        width: 20%;
+    }
+
+
+    .first-col-comment {
+        width: 20%;
+    }
+
+    .third-col-comment {
+        width: 60%;
+    }
+
+    .four-col-comment {
+        width: 10%;
+    }
+
+    .navbar-image {
+        max-width: 2%;
+    }
+
+    .pagination a:hover {
+        text-decoration: none;
+    }
+
+    .pagination .disabled {
+        color: #b5b5b5 !important;
+        background-color: #6e6e6e !important;
+    }
+
+        .pagination .disabled:hover {
+            color: #b5b5b5 !important;
+            background-color: #6e6e6e !important;
+            cursor: default;
+        }
+
+.pagination .admin-disabled {
+    color: #cccccc !important;
+}
+
+.pagination .admin-disabled:hover {
+    cursor: default !important;
+}
+
+.pagination .admin-disabled:hover .page-link {
+    background: white;
+}
+
+.pagination .page-item:hover {
+    cursor: pointer;
+}
+
+.border-color-light-gray {
+    border: 1px solid #dee2e6 !important;
+    height:38px !important;
+}
+
+.border-radius-right {
+    border-radius: 0px 4px 4px 0px !important;
+}
+
+
+.border-radius-left {
+    border-radius: 4px 0px 0px 4px !important;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+    #wrapper {
+        min-height: 100%;
+        position: relative;
+    }
+
+
+    #footer {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    .link-back {
+        position: relative;
+        z-index: 3;
+    }
+
+    .container-fluid {
+        padding-bottom: 100px;
+    }
+
+    .navbar input {
+        border-radius: 3px 0px 0px 3px;
+    }
+
+    .navbar .btn {
+        border-radius: 0px 3px 3px 0px;
+    }

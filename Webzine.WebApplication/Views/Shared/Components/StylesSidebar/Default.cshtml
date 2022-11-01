@@ -1,0 +1,15 @@
+﻿@model List<Webzine.Entity.Style>
+
+<div class="col">
+    <h1>A propos</h1>
+    <p>Retrouvez les dernières pépites sur notre webzine.</p>
+
+    <h1>Styles</h1>
+
+    <ul>
+        @foreach(var item in @Model)
+        {
+            <li><a asp-controller="Style" asp-action="index" asp-route-name="@item.Libelle">@item.Libelle</a></li>
+        }
+    </ul>
+</div>

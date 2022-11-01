@@ -1,0 +1,29 @@
+﻿@model IndexCommentairesViewModel
+
+<div class="col mt-4">
+    <h1>Liste des derniers commentaires</h1>
+    <hr class="mb-4">
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr class="header-column">
+                <th scope="col" class="first-col-comment text-center"><strong>Titre</strong></th>
+                <th scope="col" class="text-center">Nom</th>
+                <th scope="col" class="third-col-comment text-center">Commentaire</th>
+                <th scope="col" class="four-col-comment text-center">Date de création</th>
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Commentaires)
+            {
+                @await Component.InvokeAsync("RowTableComment", new { comment = item })
+            }
+        </tbody>
+    </table>
+    @if (Model.TotalCommentaires > Model.LengthPage)
+    {
+        @await Component.InvokeAsync("PaginationCommentaires", new { pagination = Model })
+    }
+</div>

@@ -1,0 +1,29 @@
+﻿@model TitresViewModel
+
+<tr>
+    <td><a asp-area="" asp-controller="Artiste" asp-action="index" asp-route-id="@Model.NomArtiste">@Html.DisplayFor(model => model.NomArtiste)</a></td>
+    <td><a asp-area="" asp-controller="Titre" asp-action="index" asp-route-id="@Model.IdTitre">@Html.DisplayFor(model => model.NomTitre)</a></td>
+    <td class="text-center align-middle">
+        @(Model.Duree.ConvertToHM())
+    </td>
+    <td class="text-center align-middle">@Html.DisplayFor(model => model.DateSortie)</td>
+    <td class="text-center align-middle">@Html.DisplayFor(model => model.NbLectures)</td>
+    <td class="text-center align-middle">@Html.DisplayFor(model => model.NbLikes)</td>
+    <td class="text-center align-middle">@Html.DisplayFor(model => model.NbCommentaires)</td>
+
+    <td>
+        <div class="d-flex flex-row justify-content-center align-middle ">
+            <form method="get">
+                <button asp-route-area="Administration" asp-controller="Titres" asp-action="@(nameof(TitresController.Manage))" asp-route-id="@Model.IdTitre" asp-route-fonction="Edit" class="bg-transparent border-0">
+                    <i class="fas fa-edit text-primary"></i>
+                </button>
+            </form>
+            <form method="get">
+                <button asp-route-area="Administration" asp-controller="Titres" asp-action="@(nameof(TitresController.Delete))" asp-route-id="@Model.IdTitre " class="bg-transparent border-0">
+                    <i class="fas fa-trash text-primary"></i>
+                </button>
+            </form>
+        </div>
+
+    </td>
+</tr>

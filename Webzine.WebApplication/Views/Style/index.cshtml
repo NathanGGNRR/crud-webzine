@@ -1,0 +1,55 @@
+﻿@model StyleViewModel
+
+<div class="col-9">
+    <h1>Titre ayant le style @Model.Style.Libelle</h1>
+    <hr />
+    @foreach (var titre in Model.Style.LienStyle)
+    {
+        <div class="search-result d-flex align-items-center mb-4">
+            @if (titre.Titre.UrlJaquette == "" || titre.Titre.UrlJaquette == null)
+            {
+                <img src="~/images/not-found.png">
+            }
+            else
+            {
+                <img src="@titre.Titre.UrlJaquette">
+            }
+            <div class="col">
+                <p><a asp-controller="Artiste" asp-action="Index" asp-route-id="@titre.Titre.Artiste.Nom">@titre.Titre.Artiste.Nom</a> - <a asp-controller="Titre" asp-action="Index" asp-route-id="@titre.IdTitre">@titre.Titre.Libelle</a></p>
+                <p>
+                    Durée : @(titre.Titre.Duree.ConvertToHM())
+                </p>
+            </div>
+        </div>
+    }
+    @if (Model.PageActuel != 0 || Model.Next)
+    {
+        <nav aria-label="Page navigation home">
+            <ul class="pagination mt-3 justify-content-between ">
+                @if (Model.PageActuel > 0)
+                {
+                    @if (Model.PageActuel == 1)
+                    {
+                        <a class="bg-secondary p-2 text-white rounded" asp-controller="Style" asp-action="Index" asp-route-name="@Model.Style.Libelle">&laquo; Titres plus récents</a>
+                    }
+                    else
+                    {
+                        <a class="bg-secondary p-2 text-white rounded" asp-controller="Style" asp-action="Navigate" asp-route-name="@Model.Style.Libelle" asp-route-id="@(Model.PageActuel - 1)">&laquo; Titres plus récents</a>
+                    }
+                }
+                else
+                {
+                    <a class="bg-secondary text-white p-2 disabled rounded">&laquo; Titres plus récents</a>
+                }
+                @if (Model.Next)
+                {
+                    <a class="bg-secondary text-white p-2 rounded" asp-controller="Style" asp-action="Navigate" asp-route-name="@Model.Style.Libelle" asp-route-id="@(Model.PageActuel + 1)">Titres plus anciens &raquo;</a>
+                }
+                else
+                {
+                    <a class="bg-secondary p-2 rounded disabled">Titres plus anciens &raquo;</a>
+                }
+            </ul>
+        </nav>
+    }
+</div>

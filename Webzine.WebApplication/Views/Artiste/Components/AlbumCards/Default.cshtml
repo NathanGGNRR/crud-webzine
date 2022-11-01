@@ -1,0 +1,39 @@
+﻿@model List<Webzine.Entity.Titre>
+
+    <div class="row ml-1">
+        @if (Model[0].UrlJaquette == "" || Model[0].UrlJaquette == null)
+        {
+            <img class="p-4 mt-0 img-fluid img-album" src="~/images/not-found.png" />
+        }
+
+        else
+        {
+            <img class="p-4 mt-0 img-fluid img-album" src="@Model[0].UrlJaquette" />
+        }
+        <div class="col">
+            <h1>
+                @Html.DisplayFor(model => model[0].Album)
+            </h1>
+            <div class="table-responsive">
+                <table class="table w-75">
+                    <tr class="header-column">
+                        <th class="w-50">Titre</th>
+                        <th class="text-center">Durée</th>
+                        <th class="text-center">Chronique</th>
+                    </tr>
+                    @foreach (var titre in @Model)
+                    {
+                        <tr class="align-content-center">
+                            <td class="h-100  align-middle">@titre.Libelle</td>
+                            <td class="h-100 text-center align-middle">
+                                @(titre.Duree.ConvertToHM())
+                            </td>
+                            <td class="h-100 text-center align-middle">
+                                <a asp-controller="Titre" asp-action="titreFromArtist" asp-route-id="@titre.IdTitre" asp-route-artiste="@titre.Artiste.Nom" asp-route-titre="@titre.Libelle"><i class="fas fa-link"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>

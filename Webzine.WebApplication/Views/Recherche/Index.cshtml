@@ -1,0 +1,54 @@
+﻿@model Webzine.WebApplication.ViewModels.RechercheViewModel
+
+
+<div class="col-9">
+    <h1>@(Model.Keywords != null ? "Résultat(s) de la recherche pour \"" + @Model.Keywords + "\"" : "Résultat de la recherche vide")</h1>
+    <hr>
+
+    <h2>Artistes</h2>
+    @if (Model.Artistes.Count != 0)
+    {
+        @foreach (var artiste in Model.Artistes)
+        {
+            <div class="d-flex flex-row align-items-center">
+                <i class="fas fa-user mr-2"></i>
+                <a asp-controller="Artiste" asp-action="Index" asp-route-id="@artiste.Nom">@artiste.Nom</a>
+            </div>
+        }
+    }
+    else
+    {
+        <h4>Aucun artiste ne correspond.</h4>
+    }
+
+    <br>
+    <h2>Titres</h2>
+    @if (Model.Titres.Count != 0)
+    {
+        @foreach (var titre in Model.Titres)
+        {
+            <div class="search-result d-flex align-items-center mb-4">
+                @if (titre.UrlJaquette == "" || titre.UrlJaquette == null)
+                {
+                    <img src="~/images/not-found.png">
+                }
+                else
+                {
+                    <img src="@titre.UrlJaquette">
+                }
+
+                <div class="col">
+                    <p><a asp-controller="Artiste" asp-action="Index" asp-route-id="@titre.Artiste.Nom">@titre.Artiste.Nom</a> - <a asp-controller="Titre" asp-action="Index" asp-route-id="@titre.IdTitre">@titre.Libelle</a></p>
+                    <p>
+                        Durée : @(titre.Duree.ConvertToHM())
+                    </p>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h4>Aucun titre ne correspond.</h4>
+    }
+
+</div>

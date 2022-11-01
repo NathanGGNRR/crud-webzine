@@ -1,0 +1,20 @@
+﻿@model StylesViewModel
+
+<tr>
+    <td><a asp-area="" asp-controller="Style" asp-action="index" asp-route-name="@Model.Libelle">@Html.DisplayFor(model => model.Libelle)</a></td>
+    <td>
+        <div class="d-flex flex-row align-items-center justify-content-center">
+            <form  method="get">
+                <button asp-route-area="Administration" asp-controller="Styles" asp-action="@(nameof(StylesController.Manage))" asp-route-fonction="Edit" asp-route-id="@Model.IdStyle" class="bg-transparent border-0">
+                    <i class="fas fa-edit text-primary"></i>
+                </button>
+            </form>
+            <form  method="get">
+                <button asp-route-area="Administration" asp-controller="Styles" asp-action="@(nameof(StylesController.Delete))" asp-route-id="@Model.IdStyle" class="bg-transparent border-0">
+                    <i class="fas fa-trash text-primary"></i>
+                </button>
+            </form>
+        </div>
+
+    </td>
+</tr>

@@ -1,0 +1,105 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model Webzine.WebApplication.ViewModels.TitreViewModel
+
+<div class="col-9">
+    <h1><a asp-controller="Artiste" asp-action="Index" asp-route-id="@Model.Titre.Artiste.Nom">@Model.Titre.Artiste.Nom </a> - @Model.Titre.Libelle</h1>
+
+
+    <div class="d-flex flex-row align-items-center">
+        <p class="mr-4"><i class="fas fa-calendar mr-2"></i>Le @Model.Titre.DateSortie</p>
+        <p class="mr-4"><i class="fas fa-heart mr-2"></i>@Model.Titre.NbLikes</p>
+        <div class="d-flex flex-row mr-4 align-items-center mb-3">
+            <i class="fas fa-tags mr-2"></i><p class="pl-0 mr-2 mb-0">Styles:</p>
+            @foreach (var stl in Model.Titre.LienStyle)
+            {
+                <a asp-controller="Style" asp-action="index" asp-route-name="@stl.Style.Libelle" class="ml-1">@stl.Style.Libelle</a>
+            }
+        </div>
+        <form method="post">
+            <input type="hidden" value="@Model.IdTitre" name="id" />
+            <p class="mr-4"><button type="submit" asp-controller="Titre" asp-action="Like" class="btn btn-outline-primary"><i class="fas fa-thumbs-up mr-2"></i>Like</button></p>
+        </form>
+        <p class="mr-4"><a asp-area="Administration" asp-controller="Titres" asp-action="Edit" asp-route-id="@Model.IdTitre"><i class="fas fa-edit mr-2"></i>Editer</a></p>
+    </div>
+
+    <div class="content">
+        @if (Model.Titre.UrlJaquette == "" || Model.Titre.UrlJaquette == null)
+        {
+            <img class="img-fluid float-right ml-3 mb-3 mw-20" src="~/images/not-found.png" align="right">
+        }
+
+        else
+        {
+            <img class="img-fluid float-right ml-3 mb-3 mw-20" src="@Model.Titre.UrlJaquette" align="right">
+        }
+
+        <p class="text-justify">@Model.Titre.Chronique</p>
+        @if (Model.Titre.UrlEcoute == "" || Model.Titre.UrlEcoute == null)
+        {
+            <p>Aucune écoute disponible.</p>
+        }
+
+        else if (Model.Titre.UrlEcoute.Contains("youtube"))
+        {
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="@Model.Titre.UrlEcoute"
+                        allowfullscreen></iframe>
+            </div>
+        }
+
+        else if (Model.Titre.UrlEcoute.Contains("open.spotify.com"))
+        {
+            <iframe width="380" height="300" src="@Model.Titre.UrlEcoute" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        }
+
+
+        <h2 class="mt-5">Donne ton avis sur le titre</h2>
+        <form method="post">
+            <input type="hidden" asp-for="@Model.IdTitre" />
+            <div class="form-group row">
+                <label for="nom" class="col-sm-2 col-form-label d-flex flex-row">Nom<span class="text-danger">*</span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Votre nom (exemple : Emmanuel)" asp-for="@Model.NewCommentaire.Auteur">
+                    <span asp-validation-for="@Model.NewCommentaire.Auteur" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="commentaire" class="col-sm-2 col-form-label d-flex flex-row">Commentaire<span class="text-danger">*</span></label>
+                <div class="col-sm-10">
+                    <div class="d-flex flex-column">
+                        <textarea type="text" class="form-control" placeholder="Votre commentaire..." asp-for="@Model.NewCommentaire.Contenu"></textarea>
+                        <span asp-validation-for="@Model.NewCommentaire.Contenu" class="text-danger"></span>
+                    </div>
+                    <button asp-controller="Titre" asp-action="Commentaire" class="btn btn-primary mt-4">Envoyer</button>
+                </div>
+            </div>
+        </form>
+
+        <h2 class="mt-4 mb-3">Commentaires</h2>
+        @if (Model.Titre.Commentaires.Count == 0)
+        {
+            <p>Aucun commentaire. Sois le premier à donner ton avis sur le titre.</p>
+        }
+
+        else
+        {
+            @foreach (var item in Model.Titre.Commentaires)
+            {
+                <div class="row mb-4">
+                    <div class="col-2 text-right">
+                        <i class="fas fa-user fa-5x text-info"></i>
+                    </div>
+
+                    <div class="col my-auto">
+                        <h5 class="d-flex flex-row mb-0"><div class="font-weight-bold">@item.Auteur</div><div class="text-black-50">, le @item.DateCreation</div></h5>
+                        <p class="mb-0">@item.Contenu</p>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>

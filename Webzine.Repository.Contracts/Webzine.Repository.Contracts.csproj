@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Faker.NETCore" Version="1.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Webzine.Common\Webzine.Common.csproj" />
+    <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

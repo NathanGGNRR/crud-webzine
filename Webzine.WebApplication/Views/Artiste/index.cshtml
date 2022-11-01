@@ -1,0 +1,14 @@
+﻿@model Webzine.WebApplication.ViewModels.ArtisteViewModel
+
+
+<div class="col-9">
+    <h1>@Model.Artist.Nom</h1>
+    <hr />
+    <article class="w-75 mt-4 text-justify">@Model.Artist.Biographie</article>
+    <h2 class="mt-4">Albums</h2>
+    <hr />
+    @foreach (var album in Model.Albums)
+    {
+        @await Component.InvokeAsync("AlbumCards", new { tracks = album })
+    }
+</div>

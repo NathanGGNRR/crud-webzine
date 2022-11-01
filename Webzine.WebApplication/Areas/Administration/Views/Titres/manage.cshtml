@@ -1,0 +1,110 @@
+﻿@model ManageTitresViewModel
+
+<h1>@(Model.Titre.IdTitre != 0 ? "Édition d'un titre" : "Création d'un titre")</h1>
+<hr>
+
+<form class="ml-2" method="post">
+    <input asp-for="@Model.Titre.IdTitre" />
+    <div class="form-group row">
+
+        <label for="artistName" class="col col-form-label">Nom de l'artiste</label>
+        <div class="col-11">
+            <select class="custom-select" asp-for="@Model.Titre.IdArtiste" asp-items="@Model.Artistes">
+                <option value="0" selected disabled>Choisi...</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="trackTitle" class="col col-form-label d-flex flex-row">Titre<span class="text-danger ml-1">*</span></label>
+        <div class="col-11">
+            <input type="text" class="form-control" id="trackTitle" asp-for=" @Model.Titre.NomTitre">
+            <span asp-validation-for="@Model.Titre.NomTitre" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="albumTitle" class="col col-form-label d-flex flex-row">Album<span class="text-danger ml-1">*</span></label>
+        <div class="col-11">
+            <input type="text" class="form-control" id="albumTitle" asp-for="@Model.Titre.Album">
+            <span asp-validation-for="@Model.Titre.Album" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="chronique" class="col col-form-label d-flex flex-row">Chronique<span class="text-danger ml-1">*</span></label>
+        <div class="col-11">
+            <textarea class="form-control" id="chronique" asp-for="@Model.Titre.Chronique"></textarea>
+            <span asp-validation-for="@Model.Titre.Chronique" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="dateSortie" class="col-1 col-form-label d-flex flex-row">Date de sortie<span class="text-danger ml-1">*</span></label>
+        <div class="col-4">
+            <input type="date" class="form-control" asp-for="@Model.Titre.DateSortie" />
+            <span asp-validation-for="@Model.Titre.DateSortie" class="text-danger"></span>
+        </div>
+
+        <label for="duree" class="col-2 col-form-label text-center">Durée en secondes</label>
+        <div class="col-5">
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="number" min="0" class="form-control" id="duree" asp-for="@Model.Titre.Duree">
+                <div class="input-group-prepend">
+                    <div class="input-group-text rounded-right">secondes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="jaquetteURL" class="col col-form-label d-flex flex-row">URL jacquette<span class="text-danger ml-1">*</span></label>
+        <div class="col-11">
+            <input type="text" class="form-control" id="jaquetteURL" asp-for="@Model.Titre.UrlJaquette">
+            <span asp-validation-for="@Model.Titre.UrlJaquette" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="ecouteURL" class="col col-form-label">URL d'écoute</label>
+        <div class="col-11">
+            <input type="text" class="form-control" id="ecouteURL" asp-for="@Model.Titre.UrlEcoute">
+            <span asp-validation-for="@Model.Titre.UrlEcoute" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-1 col-form-label">Styles</label>
+        <div class="col-11">
+            <div class="row pl-3">
+                @foreach (StylesViewModel style in Model.Styles)
+                {
+                    <div class="col-5 p-0">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="style.IdStyle" checked="@style.Checked" value="@style.IdStyle">
+                            <label class="form-check-label" asp-for="@style.Libelle">@style.Libelle</label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group d-flex flex-row align-items-center">
+        <label class="col-1 col-form-label pl-0">Nombre de lectures</label>
+        <div class="col-4">
+            <p class="mb-0">@Model.Titre.NbLectures</p>
+            <input type="hidden" asp-for="@Model.Titre.NbLectures" />
+        </div>
+
+        <label class="col-1 col-form-label pl-0">Nombre de likes</label>
+        <div class="col-4">
+            <p class="mb-0">@Model.Titre.NbLikes</p>
+            <input type="hidden" asp-for="@Model.Titre.NbLikes" />
+        </div>
+    </div>
+
+    <button asp-area="Administration" asp-controller="Titres" asp-action="@(nameof(TitresController.Manage))" class="offset-1 btn btn-primary">
+        @(Model.Titre.IdTitre != 0 ? "Sauvegarder" : "Ajouter")
+    </button>
+</form>
+<div class="mt-5 link-back">
+    <a asp-action="Index">Retour à l'administration des titres</a>
+</div>

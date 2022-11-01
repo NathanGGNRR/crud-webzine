@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Abp" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Webzine.Business.Contracts\Webzine.Business.Contracts.csproj" />
+    <ProjectReference Include="..\Webzine.Entity\Webzine.Entity.csproj" />
+    <ProjectReference Include="..\Webzine.Repository.Contracts\Webzine.Repository.Contracts.csproj" />
+    <ProjectReference Include="..\Webzine.Repository\Webzine.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

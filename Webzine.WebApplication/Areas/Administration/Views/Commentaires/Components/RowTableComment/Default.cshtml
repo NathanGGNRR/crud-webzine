@@ -1,0 +1,17 @@
+﻿@model CommentairesViewModel
+
+<tr>
+    <td class="align-middle"><a asp-area="" asp-controller="Artiste" asp-action="Index" asp-route-id="@Model.NomArtiste">@Model.NomArtiste</a> - <a asp-area="" asp-controller="Titre" asp-action="Index" asp-route-id="@Model.IdTitre">@Model.NomTitre</a></td>
+    <td class="align-middle">@Html.DisplayFor(model => model.Auteur)</td>
+    <td class="align-middle">@Html.DisplayFor(model => model.Contenu)</td>
+    <td class="align-middle">@Html.DisplayFor(model => model.DateCreation)</td>
+
+    <td class="text-center align-middle">
+        <form asp-controller="Commentaires" asp-action="Delete" asp-route-area="Administration" asp-route-id="@Model.IdCommentaire" method="get">
+            <button type="submit" class="bg-transparent border-0">
+                <i class="fas fa-trash text-primary"></i>
+            </button>
+        </form>
+
+    </td>
+</tr>

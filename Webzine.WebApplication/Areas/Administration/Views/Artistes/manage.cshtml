@@ -1,0 +1,36 @@
+﻿@model ArtisteViewModel
+
+<div class="col mt-4">
+    <h1>@(Model.IdArtiste != 0 ? "Édition d'un artiste" : "Création d'un artiste")</h1>
+    <hr />
+    <form class="m-0 py-0" method="post">
+        <input asp-for="@Model.IdArtiste" />
+        <div class="d-flex flex-column">
+            <div class="d-flex flex-row mr-4">
+                <div class="title-input-edit col-1 p-0 mt-2 d-flex flex-row">Nom de l'artiste<span class="text-danger ml-1">*</span></div>
+                <div class="d-flex flex-column mb-4 w-100">
+                    <input class="form-control" type="text" asp-for="@Model.NomArtiste">
+                    <span asp-validation-for="@Model.NomArtiste" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="d-flex flex-row mr-4">
+                <p class="title-input-edit col-1 p-0 mt-2">Biographie<span class="text-danger ml-1">*</span></p>
+                <div class="d-flex flex-column mb-4 w-100">
+                    <textarea class="form-control" rows="10" asp-for="@Model.Biographie"></textarea>
+                    <span asp-validation-for="@Model.Biographie" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col p-0">
+            <div class="col-10 offset-1 p-0">
+                <button asp-area="Administration" asp-controller="Artistes" asp-action="@(nameof(ArtistesController.Manage))" class="btn btn-primary width-button-save">
+                    @(Model.IdArtiste != 0 ? "Sauvegarder" : "Ajouter")
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="mt-5">
+    <a asp-action="Index">Retour à l'administration des artistes</a>
+</div>

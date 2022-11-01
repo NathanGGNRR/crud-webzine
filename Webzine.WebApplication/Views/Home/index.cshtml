@@ -1,0 +1,105 @@
+﻿@model Webzine.WebApplication.ViewModels.HomeViewModel
+
+<div class="col-9 mx-sm-0 mx-auto">
+
+    <h1 class="mb-3">Derniers titres chroniqués</h1>
+
+    @foreach (var titre in Model.DerniersTitres)
+    {
+        <div class="row bg-light px-4 pt-4 mb-4">
+            <div class="col-12 col-xl-2">
+                <div class="card p-1">
+                    <a asp-controller="Titre" asp-action="Index" asp-route-id="@titre.IdTitre">
+                        @if (titre.UrlJaquette == null || titre.UrlJaquette == "")
+                        {
+                            <img class="img-fluid card-img-top" src="~/images/not-found.png" />
+                        }
+
+                        else
+                        {
+                            <img class="img-fluid card-img-top" src="@titre.UrlJaquette" />
+                        }
+
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-12 col-xl-10 mt-3 mt-xl-0">
+                <h2><a asp-controller="Artiste" asp-action="Index" asp-route-id="@titre.Artiste.Nom">@titre.Artiste.Nom</a> - <a asp-controller="Titre" asp-action="Index" asp-route-id="@titre.IdTitre">@titre.Libelle</a></h2>
+                <p class="text-justify">
+                    @(titre.Chronique.SubstringEndSuspension(200))
+                </p>
+                <div class="row align-items-center">
+                    <a class="m-3 btn btn-primary" asp-controller="Titre" asp-action="Index" asp-route-id="@titre.IdTitre">Lire la suite</a>
+                    <i class="fas fa-calendar "></i><p class="mr-3 mb-0 ml-2">@titre.DateSortie</p>
+                    <i class="fas fa-tags"></i>
+                    @foreach (var lienStyle in titre.LienStyle)
+                    {
+                        <a class="ml-2" asp-controller="Style" asp-action="Index" asp-route-name="@lienStyle.Style.Libelle">@lienStyle.Style.Libelle</a>
+                        //TODO virgule
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.PageActuel != 0 || Model.Next)
+    {
+        <nav aria-label="Page navigation home">
+            <ul class="pagination mt-3 justify-content-between ">
+                @if (Model.PageActuel > 0)
+                {
+                    @if (Model.PageActuel == 1)
+                    {
+                        <a class="bg-secondary p-2 text-white rounded" asp-controller="Home" asp-action="Index">&laquo; Titres plus récents</a>
+                    }
+                    else
+                    {
+                        <a class="bg-secondary p-2 text-white rounded" asp-controller="Home" asp-action="Navigate" asp-route-id="@(Model.PageActuel - 1)">&laquo; Titres plus récents</a>
+                    }
+                }
+                else
+                {
+                    <a class="bg-secondary text-white p-2 disabled rounded">&laquo; Titres plus récents</a>
+                }
+                @if (Model.Next)
+                {
+                    <a class="bg-secondary text-white p-2 rounded" asp-controller="Home" asp-action="Navigate" asp-route-id="@(Model.PageActuel + 1)">Titres plus anciens &raquo;</a>
+                }
+                else
+                {
+                    <a class="bg-secondary p-2 rounded disabled">Titres plus anciens &raquo;</a>
+                }
+            </ul>
+        </nav>
+    }
+
+    <div class="col">
+        <h1>Titres les plus populaires</h1>
+        <div class="row">
+            @foreach (var titre in Model.TitresPopulaires)
+            {
+                <div class="col-4 px-1 px-xl-3">
+                    <div class="card">
+                        <a asp-controller="Titre" asp-action="Index" asp-route-id="@titre.IdTitre">
+                            @if (titre.UrlJaquette == "" || titre.UrlJaquette == null)
+                            {
+                                <img class="card-img-top" src="~/images/not-found.png">
+                            }
+
+                            else
+                            {
+                                <img class="card-img-top" src="@titre.UrlJaquette">
+                            }
+                        </a>
+                        <div class="card-body">
+                            <h5 class="mb-0"><a asp-controller="Titre" asp-action="Index" asp-route-id="@titre.IdTitre">@titre.Libelle</a></h5>
+                            <a>par</a>
+                            <a asp-controller="Artiste" asp-action="Index" asp-route-id="@titre.Artiste.Nom" class="card-link">@titre.Artiste.Nom</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

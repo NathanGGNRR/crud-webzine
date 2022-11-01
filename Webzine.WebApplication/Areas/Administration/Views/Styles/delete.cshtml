@@ -1,0 +1,16 @@
+﻿@model StylesViewModel
+
+<div class="col mt-4">
+    <h1>Supprimer un style</h1>
+    <hr />
+    <p class="mb-3">Êtes-vous sûr de vouloir supprimer le style "@Model.Libelle" ?</p>
+    <form class="m-0 py-0" method="post">
+        <input type="hidden" asp-for="@Model.IdStyle" />
+        <button asp-area="Administration" asp-controller="Styles" asp-action="Delete" name="supprimerStyle" class="btn btn-danger mb-4">
+            Supprimer
+        </button>
+    </form>
+    <div class="mt-5">
+        <a asp-action="Index">Retour à l'administration des styles</a>
+    </div>
+</div>

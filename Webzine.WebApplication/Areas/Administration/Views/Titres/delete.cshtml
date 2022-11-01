@@ -1,0 +1,16 @@
+﻿@model TitresViewModel
+
+<div class="col mt-4">
+    <h1>Supprimer un titre</h1>
+    <hr />
+    <p class="mb-3">Êtes-vous sûr de vouloir supprimer le titre "@Model.NomTitre" ?</p>
+    <form class="m-0 py-0" method="post">
+        <input type="hidden" asp-for="@Model.IdTitre" />
+        <button asp-area="Administration" asp-controller="Titres" asp-action="Delete" name="supprimerTitre" class="btn btn-danger mb-4">
+            Supprimer
+        </button>
+    </form>
+    <div>
+        <a asp-area="Administration" asp-controller="Titres" asp-action="Index">Retour à l'administration des titres</a>
+    </div>
+</div>

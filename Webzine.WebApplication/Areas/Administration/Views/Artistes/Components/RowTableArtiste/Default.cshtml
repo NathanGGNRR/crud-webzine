@@ -1,0 +1,20 @@
+﻿@model ArtisteViewModel
+
+<tr>
+    <td><a asp-area="" asp-controller="Artiste" asp-action="index" asp-route-id="@Model.NomArtiste">@Html.DisplayFor(model => model.NomArtiste)</a></td>
+    <td>
+        <div class="d-flex flex-row align-items-center justify-content-center">
+            <form method="get">
+                <button asp-route-area="Administration" asp-controller="Artistes" asp-action="@(nameof(ArtistesController.Manage))" asp-route-id="@Model.IdArtiste" asp-route-fonction="Edit" class="bg-transparent border-0">
+                    <i class="fas fa-edit text-primary"></i>
+                </button>
+            </form>
+            <form method="get">
+                <button asp-route-area="Administration" asp-controller="Artistes" asp-action="@(nameof(ArtistesController.Delete))" asp-route-id="@Model.IdArtiste" class="bg-transparent border-0">
+                    <i class="fas fa-trash text-primary"></i>
+                </button>
+            </form>
+        </div>
+
+    </td>
+</tr>

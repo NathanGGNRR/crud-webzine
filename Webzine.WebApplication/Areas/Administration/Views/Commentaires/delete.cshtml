@@ -1,0 +1,16 @@
+﻿@model CommentairesViewModel
+
+<div class="col mt-4">
+    <h1>Supprimer un commentaire</h1>
+    <hr />
+    <p class="mb-3">Êtes-vous sûr de vouloir supprimer le commentaire de "@Model.Auteur" sur le titre "@Model.NomArtiste - @Model.NomTitre" datant du @Model.DateCreation ?</p>
+    <form class="m-0 py-0" method="post">
+        <input type="hidden" asp-for="@Model.IdCommentaire" />
+        <button asp-area="Administration" asp-controller="Commentaires" asp-action="Delete" name="supprimerComment" class="btn btn-danger mb-4">
+            Supprimer
+        </button>
+    </form>
+    <div class="mt-5">
+        <a asp-action="Index">Retour à l'administration des commentaires</a>
+    </div>
+</div>

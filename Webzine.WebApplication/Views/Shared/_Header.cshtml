@@ -1,0 +1,38 @@
+﻿<header>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-5">
+        <a class="navbar-brand text-white mr-2" asp-area="" asp-controller="Home" asp-action="index">Webzine</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon text-white"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active mr-2">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="index"><i class="fas fa-home mr-1"></i>Accueil</a>
+                </li>
+                <li class="nav-item dropdown mr-2">
+                    <a class="nav-link  text-white dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-tools"></i> Administration
+                    </a>
+                    <div class="dropdown-menu bg-white" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item d-flex flex-row align-items-center" asp-area="Administration" asp-controller="Artistes" asp-action="index"><i class="fa fa-users mr-2"></i><p class="text-dark mb-0">Artistes</p></a>
+                        <a class="dropdown-item d-flex flex-row align-items-center" asp-area="Administration" asp-controller="Commentaires" asp-action="index"><i class="fa fa-comment mr-2"></i><p class="text-dark mb-0">Commentaires</p></a>
+                        <a class="dropdown-item d-flex flex-row align-items-center" asp-area="Administration" asp-controller="Styles" asp-action="index"><i class="fa fa-tags mr-2"></i><p class="text-dark mb-0">Styles</p></a>
+                        <a class="dropdown-item d-flex flex-row align-items-center" asp-area="Administration" asp-controller="Titres" asp-action="index"><i class="fa fa-music mr-2"></i><p class="text-dark mb-0">Titres</p></a>
+
+                    </div>
+                </li>
+                <li class="nav-item mr-2">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Contact" asp-action="index"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </li>
+            </ul>
+            <form class="d-flex flex-row my-2 my-lg-0 w-15" asp-area="" asp-controller="Recherche" asp-action="index" method="post">
+                <input class="form-control w-100 mr-0" type="search" placeholder="Trouver un artiste / titre"
+                       aria-label="Search" name="keywords">
+                <button class="btn btn-primary my-0 fas fa-search" type="submit"></button>
+            </form>
+        </div>
+    </nav>
+</header>

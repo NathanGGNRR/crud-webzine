@@ -1,0 +1,30 @@
+﻿@model IndexStylesViewModel
+
+<div class="col mt-4">
+    <h1>Styles</h1>
+    <hr />
+    <form method="get">
+        <button asp-route-area="Administration" asp-controller="Styles" asp-action="@(nameof(StylesController.Manage))" asp-route-fonction="Create" class="btn btn-primary mb-4">
+            <i class="fas fa-plus mr-2"></i>Ajouter un nouveau style
+        </button>
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr class="header-column">
+                <th scope="col" class="first-column">Libellé</th>
+                <th scope="col" class="second-column">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Styles)
+            {
+                @await Component.InvokeAsync("RowTableStyle", new { style = item });
+            }
+
+        </tbody>
+    </table>
+    @if (Model.TotalStyles > Model.LengthPage)
+    {
+        @await Component.InvokeAsync("PaginationStyles", new { pagination = Model })
+    }
+</div>
